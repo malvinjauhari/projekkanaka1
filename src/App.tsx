@@ -32,6 +32,8 @@ import { FaqPage } from './features/public/FaqPage';
 import { RefundPolicyPage } from './features/public/RefundPolicyPage';
 import { TermsPage } from './features/public/TermsPage';
 import { ContactPage } from './features/public/ContactPage';
+import { NotFoundPage } from './features/public/NotFoundPage';
+import { ErrorPage } from './features/public/ErrorPage';
 import {
   getDisasters,
   getUserDonations,
@@ -528,8 +530,32 @@ function MainRoutes() {
       <Route path="/terms" element={<TermsPage />} />
       <Route path="/contact" element={<ContactPage />} />
 
+      {/* 9. Error Pages */}
+      <Route path="/404" element={<NotFoundPage />} />
+      <Route
+        path="/403"
+        element={
+          <ErrorPage
+            code="403"
+            title="Akses ditolak"
+            message="Anda tidak memiliki izin untuk membuka halaman ini. Login dengan akun yang sesuai untuk melanjutkan."
+          />
+        }
+      />
+      <Route
+        path="/500"
+        element={
+          <ErrorPage
+            code="500"
+            title="Server bermasalah"
+            message="Server mengalami gangguan. Coba muat ulang halaman atau kembali lagi nanti."
+          />
+        }
+      />
+      <Route path="/error" element={<ErrorPage />} />
+
       {/* Fallback */}
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }
